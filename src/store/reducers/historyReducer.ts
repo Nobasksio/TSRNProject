@@ -1,14 +1,19 @@
-import {BasketState, CatalogState, HistoryState} from "../../interfaces/interfaces";
-import {CATALOG_REQUEST, CATALOG_REQUEST_FAIL, CATALOG_REQUEST_SUCCESS} from "../actions/catalogActions";
-import {SAVE_ORDER, SaveOrderActionI} from "../actions/historyActions";
+import {HistoryState} from "../../interfaces/interfaces";
+import {
+    GET_STORAGE_DATA_SUCCESS,
+    HistoryActionsI,
+    SAVE_ORDER,
+    SET_STORAGE_DATA_SUCCESS
+} from "../actions/historyActions";
 
 const initialState: HistoryState = {
-    orders: []
+    orders: [],
+    isSync: false
 };
 
 
 export const historyReducer = (state: HistoryState = initialState,
-                               action: SaveOrderActionI)
+                               action: HistoryActionsI)
     :HistoryState => {
     switch (action.type) {
         case SAVE_ORDER: return {
@@ -16,6 +21,15 @@ export const historyReducer = (state: HistoryState = initialState,
                 products: [...action.basketState.products],
                 date: new Date(),
             }],
+            isSync: false,
+        }
+        case SET_STORAGE_DATA_SUCCESS: return {
+            ...state,
+            isSync: true,
+        }
+        case GET_STORAGE_DATA_SUCCESS: return {
+            orders: [...action.historyState.orders],
+            isSync: true,
         }
         default: return state
     }

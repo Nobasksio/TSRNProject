@@ -1,7 +1,6 @@
 import React from 'react';
 import { TextInput, View, Text, StyleSheet } from 'react-native';
-import {IPhone, TextFieldProps} from '../interfaces/interfaces';
-import {THEME} from "../style/theme";
+import { TextFieldProps} from '../interfaces/interfaces';
 
 export const TextField: React.FC<TextFieldProps> = (props) => {
 

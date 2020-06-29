@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {API_LINK} from 'react-native-dotenv'
-import {CatalogState, CategoryItem, ProductItemI} from "../../interfaces/interfaces";
+import {CatalogState, CategoryItemI, ProductItemI} from "../../interfaces/interfaces";
 
 export const CATALOG_REQUEST = 'CATALOG_REQUEST'
 export const CATALOG_REQUEST_FAIL = 'CATALOG_REQUEST_FAIL'
@@ -18,7 +18,7 @@ export interface RequestCatalogFailActionI {
 export interface RequestCatalogSuccessActionI {
     type: typeof CATALOG_REQUEST_SUCCESS
     products: ProductItemI[],
-    categories: CategoryItem[]
+    categories: CategoryItemI[]
 }
 
 export type CatalogActionTypes = RequestCatalogActionI | RequestCatalogFailActionI | RequestCatalogSuccessActionI;
@@ -59,7 +59,8 @@ export function fetchCatalog() {
                 dispatch(requsetCatalogSuccess(data));
 
             })
-            .catch(() => {
+            .catch((e) => {
+
                 dispatch(requestCatalogFail(`При получении католога возникла проблема.
                     Проверьте подключение к интернет или попробуйте позже.`));
             })

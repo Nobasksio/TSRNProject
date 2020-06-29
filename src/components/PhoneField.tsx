@@ -1,8 +1,7 @@
 import React from 'react';
-import { TextInput, View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import {TextInputMask} from "react-native-masked-text";
-import {THEME} from "../style/theme";
 import {TextFieldProps} from "../interfaces/interfaces";
 
 export const PhoneField: React.FC<TextFieldProps> = (props) => {
@@ -41,7 +40,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     fontSize: 18,
-    fontFamily: THEME.REGULAR_FONT,
   },
   nameField: {
     color: '#828282',

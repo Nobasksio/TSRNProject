@@ -11,6 +11,11 @@ export interface TextFieldProps {
     typeKeyPad?: KeyboardType,
 }
 
+export interface NavigationI {
+    name: string,
+    ruName: string,
+    isShow: boolean
+}
 export interface BasketState {
     products: BasketItemI[],
     name: string,
@@ -46,6 +51,7 @@ export interface CatalogState {
 
 export interface HistoryState {
     orders: OrderHistoryItem[]
+    isSync: boolean
 }
 
 export interface OrderHistoryItem {

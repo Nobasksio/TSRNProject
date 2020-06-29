@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, FlatList} from "react-native";
 import {CategoryItem} from "../components/CategoryItem";
 import {RootState} from "../store";
@@ -8,16 +8,12 @@ import {THEME} from "../style/theme";
 interface CatalogScreenPropsInterface {
 }
 
-export const CatalogScreen: React.FC<CatalogScreenPropsInterface> = (props) => {
+export const CatalogScreen: React.FC<CatalogScreenPropsInterface> = () => {
 
     const selectCatalog = (state: RootState) => state.catalog
 
     const catalog = useSelector(selectCatalog);
 
-    const categories = catalog.categories.map((item) => (
-        <CategoryItem key={item.id} category={item}
-        />
-    ))
     return (
         <View style={styles.mainContainer} >
             <Text style={styles.h1}>Каталог</Text>

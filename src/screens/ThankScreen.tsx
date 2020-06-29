@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, Button} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 
@@ -18,14 +18,14 @@ export const ThankScreen: React.FC<ThankScreenPropsInterface> = (props) => {
                 Вы можете:
             </Text>
             <Button title={'Перейти к истории заказов'} onPress={()=>{
-                navigation.navigate('historyTab')
+                navigation.navigate('history')
 
             }}/>
             <Text style={{textAlign: 'center'}}>
                 или
             </Text>
             <Button title={'Сделать ещё один заказ'} onPress={()=>{
-                navigation.navigate('catalogTab')
+                navigation.navigate('catalog')
 
             }}/>
         </View >

@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, Button} from "react-native";
 import {ProductItemI} from "../interfaces/interfaces";
 import {useDispatch} from "react-redux";
@@ -15,7 +15,8 @@ export const ProductItem: React.FC<ProductItemPropsInterface> = (props) => {
         <View style={styles.mainContainer} >
             <View >
                 <Text style={styles.mainText} >{props.product.name}</Text >
-                <Text >Цена {props.product.price} р</Text >
+                <Text >Цена: {props.product.price} р</Text >
+                <Text >Свойства: {props.product.property} </Text >
             </View >
             <View>
                 <Button title={'В корзину'} onPress={

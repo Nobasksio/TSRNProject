@@ -1,5 +1,6 @@
-import {BasketState} from "../../interfaces/interfaces";
+import {BasketState, HistoryState} from "../../interfaces/interfaces";
 import AsyncStorage from '@react-native-community/async-storage';
+import {RequestCatalogActionI, RequestCatalogFailActionI, RequestCatalogSuccessActionI} from "./catalogActions";
 
 export const SAVE_ORDER = 'SAVE_ORDER';
 
@@ -16,6 +17,19 @@ export interface SaveOrderActionI {
     basketState: BasketState
 }
 
+export interface SetStorageDataSuccessActionI {
+    type: typeof SET_STORAGE_DATA_SUCCESS,
+}
+
+export interface GetStorageDataSuccessArcionsI {
+    type: typeof GET_STORAGE_DATA_SUCCESS,
+    historyState: HistoryState
+}
+
+export type HistoryActionsI = SaveOrderActionI
+    | SetStorageDataSuccessActionI
+    | GetStorageDataSuccessArcionsI;
+
 
 export function saveOrder(basketState: BasketState): SaveOrderActionI {
     return {
@@ -24,16 +38,29 @@ export function saveOrder(basketState: BasketState): SaveOrderActionI {
     }
 }
 
-export function storageLoadSuccess() {
+export function setStorageDataSuccess() {
+    return {
+        type: SET_STORAGE_DATA_SUCCESS,
+    }
+}
 
+export function getStorageDataSuccess(historyState: HistoryState) {
+    return {
+        type: GET_STORAGE_DATA_SUCCESS,
+        historyState
+    }
 }
 
 export function saveOrdertoStorage(basketState: BasketState) {
     return function (dispatch: any) {
 
+        dispatch(saveOrder(basketState));
         try {
             const jsonValue = JSON.stringify(basketState)
-            return AsyncStorage.setItem('@history', jsonValue);
+            AsyncStorage.setItem('history', jsonValue)
+                .then(() => {
+                    dispatch(setStorageDataSuccess());
+                });
         } catch (e) {
 
         }
@@ -45,20 +72,19 @@ export function loadAsyncHistory() {
     return function (dispatch: any) {
 
         try {
-            AsyncStorage.getItem('@history')
-                .then((value)=>{
-                    if(value !== null) {
-                        dispatch(set)
+            AsyncStorage.getItem('history')
+                .then((value) => {
+                    if (value !== null) {
                         const basketState = JSON.parse(value);
+                        dispatch(saveOrder(basketState));
                     }
 
                 })
 
-        } catch(e) {
+        } catch (e) {
+            console.log(e);
             // error reading value
         }
-
-
 
 
     }

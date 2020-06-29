@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button} from "react-native";
+import {View, Text, StyleSheet, Button, TextInput} from "react-native";
 import {BasketItemI} from "../interfaces/interfaces";
 import {addBasket, removeOneFromBasket} from "../store/actions/basketActions";
 import {useDispatch} from "react-redux";
@@ -15,19 +15,23 @@ export const BasketItem: React.FC<BasketItemPropsInterface> = ({basketItem}) => 
             <View >
                 <Text style={styles.mainText} >{basketItem.product.name}</Text >
                 <Text >Цена {basketItem.product.price} р</Text >
-                <Text >Шт {basketItem.num}</Text >
                 <Text >итого за этот продукт {basketItem.num * basketItem.product.price}</Text >
             </View >
-            <View>
-                <Button title={'+1'} onPress={
-                    ()=> dispatch(addBasket(basketItem.product))
-                }/>
-            </View>
-            <View>
-                <Button title={'-1'} onPress={
-                    ()=> dispatch(removeOneFromBasket(basketItem.product.id))
-                }/>
-            </View>
+            <View style={styles.quantityArea}>
+                <View >
+                    <Button title={'-1'} onPress={
+                        () => dispatch(removeOneFromBasket(basketItem.product.id))
+                    } />
+                </View >
+                <View >
+                    <Text >{basketItem.num} шт </Text >
+                </View >
+                <View >
+                    <Button title={'+1'} onPress={
+                        () => dispatch(addBasket(basketItem.product))
+                    } />
+                </View >
+            </View >
         </View >
     )
 }
@@ -43,6 +47,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'stretch',
         justifyContent: 'center',
+    },
+    quantityArea: {
+        flexDirection: 'row',
+        justifyContent:'center',
+        alignItems:'center'
     },
     mainText: {
         color: '#000',

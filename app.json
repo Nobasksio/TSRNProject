@@ -22,6 +22,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "android": {
+      "package": "ru.testP.my"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }

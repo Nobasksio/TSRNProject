@@ -5,7 +5,6 @@ import {useNavigation} from "@react-navigation/native";
 import {THEME} from "../style/theme";
 import {RootState} from "../store";
 import {useSelector} from "react-redux";
-import {BasketItemI} from "../interfaces/interfaces";
 
 interface BasketScreenPropsInterface {
 }
@@ -18,7 +17,7 @@ export const BasketScreen: React.FC<BasketScreenPropsInterface> = (props) => {
 
     const basket = useSelector(selectBasket);
     const totalSumm = basket.products.reduce((total, item) => {
-        return  total+ item.num * item.product.price
+        return  total + item.num * item.product.price
     }, 0)
 
     return (
